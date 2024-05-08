@@ -10,7 +10,7 @@ def chrome_option() -> webdriver.ChromeOptions:
     For more feature, see https://peter.sh/experiments/chromium-command-line-switches/
 
     Returns:
-        selenium.webdriver.ChromeOptions: _description_
+        selenium.webdriver.ChromeOptions
     """    
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
