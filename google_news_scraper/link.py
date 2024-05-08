@@ -39,7 +39,7 @@ def __get_google_main_url(url: str) -> str:
     return main_url
 
 
-def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> None:
+def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> bool:
     """
     Scraping links in the given Google News ``url``, a number of ``number`` links, to be stored in ``result_set``.
 
@@ -47,7 +47,14 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> No
         result_set (set): Set to save the results of link scraping in Google News
         url (str): Google News link
         number (int, optional): Total links that you want to scrape, in the form of multiples of 10. Defaults to 1000.
-    """    
+
+    Returns:
+        bool
+    """
+    if number < 1:
+        print('\ntarget number must be > 0')
+        return False
+
     url1, url2 = __split_google_news_link(url)
     main_url = __get_google_main_url(url1)
     print(f"\n{main_url}")
@@ -82,9 +89,10 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> No
         message = f"Successfully got a total of {len(result_set)} unique article links"
         print(message)
         print('-' * len(message))
+        return True
 
 
-def save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bool = False) -> None:
+def save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bool = False):
     """
     Converts ``result_set`` results from ``scrape_google_news_link()`` to a CSV file.
 
