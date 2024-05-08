@@ -6,11 +6,21 @@ from selenium import webdriver
 from google_news_scraper.setting import chrome_option
 
 
-def scrape_news_text(input_csv: str, lang: str = 'id') -> tuple[dict, list]:
+def scrape_news_text(link_csv: str, lang: str = 'id') -> tuple[dict, list]:
+    """
+    Retrieves ``lang`` language content from all links in ``link_csv``.
 
-    df_news_link = pd.read_csv(input_csv)
+    Args:
+        link_csv (str): The CSV file name contains all the scraped links from Google News
+        lang (str, optional): _The language of the article link to be extracted. Defaults to 'id'.
+
+    Returns:
+        tuple[dict, list]: (dict_news, status)
+    """    
+    df_news_link = pd.read_csv(link_csv)
     dict_news = dict()
     status = list()
+    print()
 
     for i in df_news_link.index:
 
@@ -35,7 +45,6 @@ def scrape_news_text(input_csv: str, lang: str = 'id') -> tuple[dict, list]:
                     driver.close()
             try:
                 article.parse()
-                # Jika teks tidak kosong, ambil isinya
                 if article.text:
                     print(f"{i + 1} [success] {article.url}")
                     status.append('success')
@@ -52,7 +61,6 @@ def scrape_news_text(input_csv: str, lang: str = 'id') -> tuple[dict, list]:
             except Exception as e:
                 pass
 
-            # jika HTML atau teks nya kosong maka FAILED
             print(f"{i + 1} [failed ] {article.url}")
             status.append('failed')
 
@@ -63,6 +71,13 @@ def scrape_news_text(input_csv: str, lang: str = 'id') -> tuple[dict, list]:
 
 
 def save_content_to_csv(output_file: str, content_dict: dict) -> None:
+    """
+    Converts ``dict_news`` results from ``scrape_news_text()`` to a CSV file.
+
+    Args:
+        output_file (str): The desired output CSV file name
+        content_dict (dict): Dictionary of content scraping results
+    """    
     df_news = pd.DataFrame.from_dict(content_dict, orient='index')
     if output_file.endswith('.csv'):
         df_news.to_csv(output_file, index=False, sep=";")
@@ -71,6 +86,13 @@ def save_content_to_csv(output_file: str, content_dict: dict) -> None:
 
 
 def save_content_to_excel(output_file: str, content_dict: dict) -> None:
+    """
+    Converts ``dict_news`` results from ``scrape_news_text()`` to a XLSX file.
+
+    Args:
+        output_file (str): The desired output XLSX file name
+        content_dict (dict): Dictionary of content scraping results
+    """    
     df_news = pd.DataFrame.from_dict(content_dict, orient='index')
     if output_file.endswith('.xlsx'):
         df_news.to_excel(output_file)
