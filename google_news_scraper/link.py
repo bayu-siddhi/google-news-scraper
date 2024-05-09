@@ -1,8 +1,8 @@
 import re
 import time
 import dateparser
-import pandas as pd
-
+from pandas import DataFrame
+from pandas import to_datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
@@ -108,8 +108,8 @@ def save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bo
         sort (bool, optional): Data is sorted by date. Defaults to True.
         asc (bool, optional): Data is sorted by date in ascending order. Defaults to False.
     """    
-    df = pd.DataFrame(data=link_set, columns=['url', 'date'])
-    df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+    df = DataFrame(data=link_set, columns=['url', 'date'])
+    df['date'] = to_datetime(df['date'], format='%Y-%m-%d')
 
     if sort:
         df = df.sort_values(by='date', ascending=asc, ignore_index=True)
