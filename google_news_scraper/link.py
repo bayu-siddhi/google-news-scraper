@@ -65,7 +65,7 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> bo
     article_xpath = "//div[contains(@class, 'MjjYud')]/div"
 
     try:
-        for i in range(0, number, 10):
+        for i in range(0, 1000, 10):
             page = url1 + str(i) + url2
             driver.get(page)
             time.sleep(2)
@@ -77,13 +77,15 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> bo
             for article in articles:
                 a = article.find_element(By.TAG_NAME, "a").get_attribute("href")
                 date = dateparser.parse(
-                    date_string = article.find_element(By.CLASS_NAME, "OSrXXb").text,
+                    date_string=article.find_element(By.CLASS_NAME, "OSrXXb").text,
                     languages=['en', 'id'])
                 result_set.add(tuple([a, date.strftime('%Y-%m-%d')]))
-
+                if len(result_set) == number:
+                    break
+            if len(result_set) == number:
+                break
     except NoSuchElementException as e:
         print('The pages of the web have run out')
-
     finally:
         driver.close()
         message = f"Successfully got a total of {len(result_set)} unique article links"
