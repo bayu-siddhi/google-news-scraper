@@ -39,14 +39,17 @@ def __get_google_main_url(url: str) -> str:
     return main_url
 
 
-def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> bool:
+def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> bool:
     """
     Scraping links in the given Google News ``url``, a number of ``number`` links, to be stored in ``result_set``.
+
+    - You can use the same ``result_set`` to scrape links from several Google News links.
+    - For a large target ``number``, for example 1000 links, there is no guarantee that you will get 1000 links. It all depends on the number of results displayed by Google News.
 
     Args:
         result_set (set): Set to save the results of link scraping in Google News
         url (str): Google News link
-        number (int, optional): Total links that you want to scrape, in the form of multiples of 10. Defaults to 1000.
+        number (int, optional): Total links that you want to scrape. Defaults to 100.
 
     Returns:
         bool
@@ -55,6 +58,7 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> bo
         print('\ntarget number must be > 0')
         return False
 
+    target = len(result_set) + number
     url1, url2 = __split_google_news_link(url)
     main_url = __get_google_main_url(url1)
     print(f"\n{main_url}")
@@ -80,9 +84,9 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 1000) -> bo
                     date_string=article.find_element(By.CLASS_NAME, "OSrXXb").text,
                     languages=['en', 'id'])
                 result_set.add(tuple([a, date.strftime('%Y-%m-%d')]))
-                if len(result_set) == number:
+                if len(result_set) == target:
                     break
-            if len(result_set) == number:
+            if len(result_set) == target:
                 break
     except NoSuchElementException as e:
         print('The pages of the web have run out')
