@@ -22,16 +22,22 @@ class LinkTestCase(unittest.TestCase):
         self.assertFalse(result_status)
 
     def test_scrape_google_news_link_sce3(self):
-        """Scraping 5-10 link"""
+        """Scraping 5 link"""
         result_status = scrape_google_news_link(self.result, self.url, 5)
         self.assertTrue(result_status)
-        self.assertGreaterEqual(len(self.result), 5)
+        self.assertEqual(len(self.result), 5)
 
     def test_scrape_google_news_link_sce4(self):
-        """Scraping 35-40 link"""
+        """Scraping 35 link"""
         result_status = scrape_google_news_link(self.result, self.url, 35)
         self.assertTrue(result_status)
-        self.assertGreaterEqual(len(self.result), 35)
+        self.assertEqual(len(self.result), 35)
+
+    def test_scrape_google_news_link_sce5(self):
+        """Scraping 1000 link (usually it is impossible to get 1000)"""
+        result_status = scrape_google_news_link(self.result, self.url, 1000)
+        self.assertTrue(result_status)
+        self.assertLessEqual(len(self.result), 1000)
 
     def test_save_to_csv(self):
         """Test save scraping results to CSV file"""
@@ -39,12 +45,15 @@ class LinkTestCase(unittest.TestCase):
         scrape_google_news_link(self.result, self.url, 5)
         save_link_to_csv(csv_file, self.result, True, False)
 
-        self.result = list(self.result)
+        link_list = list()
+        for url, date in self.result:
+            link_list.append(url)
+
         with open(csv_file, 'r') as csv_file:
             reader = csv.reader(csv_file)
             self.assertEqual(next(reader), ['url', 'date'])
-            self.assertEqual(next(reader)[0], self.result[0][0])
-            self.assertEqual(next(reader)[0], self.result[1][0])
+            for i in range(len(self.result)):
+                self.assertTrue(next(reader)[0] in link_list)
 
         os.remove('test.csv')
 
