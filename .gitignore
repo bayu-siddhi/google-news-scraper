@@ -3,3 +3,4 @@
 *.xlsx
 *.ipynb
 __pycache__
+!tests/*csv
