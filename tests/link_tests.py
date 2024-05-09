@@ -43,12 +43,12 @@ class LinkTestCase(unittest.TestCase):
         """Scraping 50 link (25 link from url1 and 25 link from url2)"""
         result_status = scrape_google_news_link(self.result, self.url, 25)
         self.assertTrue(result_status)
-        self.assertLessEqual(len(self.result), 25)
+        self.assertEqual(len(self.result), 25)
 
         new_url = 'https://www.google.com/search?q=olahraga&sca_esv=fc0f42412f6fa1c1&tbm=nws&sxsrf=ADLYWILogXDQ9LUf6lAIBfAwedI3XbLDtg:1715235817558&ei=6Ws8ZpzNIe2X4-EPqemL-AQ&start=10&sa=N&ved=2ahUKEwjc5fGs9_-FAxXtyzgGHan0Ak8Q8tMDegQIAhAE&biw=1528&bih=716&dpr=1.25'
         result_status = scrape_google_news_link(self.result, new_url, 25)
         self.assertTrue(result_status)
-        self.assertLessEqual(len(self.result), 50)
+        self.assertEqual(len(self.result), 50)
 
     def test_save_link_to_csv(self):
         """Test save scraping results to CSV file"""
