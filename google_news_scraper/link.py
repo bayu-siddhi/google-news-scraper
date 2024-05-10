@@ -92,13 +92,14 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> boo
         print('The pages of the web have run out')
     finally:
         driver.close()
-        message = f"Successfully got a total of {len(result_set)} unique article links"
-        print(message)
-        print('-' * len(message))
-        return True
+
+    message = f"Successfully got a total of {len(result_set)} unique article links"
+    print(message)
+    print('-' * len(message))
+    return True
 
 
-def save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bool = False):
+def save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bool = False) -> None:
     """
     Converts ``result_set`` results from ``scrape_google_news_link()`` to a CSV file.
 
