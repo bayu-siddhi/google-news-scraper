@@ -18,6 +18,7 @@ def scrape_news_text(csv: str, lang: str = 'id') -> tuple[dict, list]:
         tuple[dict, list]: (dict_news, status)
     """    
     df_news_link = read_csv(csv)
+    date_status = 'date' in df_news_link.columns
     dict_news = dict()
     status = list()
     number = -1
@@ -46,17 +47,17 @@ def scrape_news_text(csv: str, lang: str = 'id') -> tuple[dict, list]:
                     driver.close()
             try:
                 article.parse()
-                if article.text:
+                if article.text and not article.title.startswith('Attention Required!'):
                     number += 1
-                    print(f"{i + 1} [success] {article.url}")
-                    status.append(['success', str(df_news_link['url'][i])])
                     dict_news[number] = {
                         'title': str(article.title),
                         'url': str(article.url),
                         'text': str(article.text),
-                        'date': df_news_link['date'][i],
+                        'date': df_news_link['date'][i] if date_status else '',
                         'tags': ', '.join(article.tags)
                     }
+                    print(f"{i + 1} [success] {article.url}")
+                    status.append(['success', str(df_news_link['url'][i])])
                     break
                 if trial_number == 1:
                     continue
