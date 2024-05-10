@@ -1,6 +1,8 @@
 .idea
+venv
+main.py
 *.csv
 *.xlsx
 *.ipynb
 __pycache__
-!tests/*csv
+!tests/data/*csv
