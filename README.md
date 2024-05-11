@@ -1,11 +1,11 @@
 # **Google News Scraper**
----
+
 Library that helps make it easier to scrape many links from Google News and extract all the text/content. Created using Selenium and Newspaper3k libraries.
 
 This library was created because I wanted to share the code I had created with other people, as well as helping me learn more about the structure of the library and how to create it.
 
 # **Function**
----
+
 There are 5 functions that I provide in this library, the first two are used for link scraping.
 ```python
 def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> bool
@@ -20,7 +20,7 @@ def save_content_to_excel(output_file: str, content_dict: dict) -> None
 ```
 
 # **Get Started**
----
+
 ## **Get Google News Link**
 The Google News used in this library is Google News on the main Google search engine. To get the link:
 
@@ -48,7 +48,7 @@ save_link_to_csv(output_file, result_set)
 ```
 
 The console output.
-```console
+```commandline
 https://www.google.com/search?q=google
 Scraping article 1 to 10
 Scraping article 11 to 20
@@ -67,7 +67,7 @@ Successfully got a total of 100 unique article links
 
 The `results.csv` output.
 
-```csv
+```text
 url,date
 https://www.inews.id/techno/internet/trik-gunakan-google-circle-to-search-di-iphone-metode-cepat-mencari-informasi,2024-05-10
 https://thehackernews.com/2024/05/malicious-android-apps-pose-as-google.html,2024-05-10
@@ -104,7 +104,7 @@ save_link_to_csv(output_file, result_set)
 
 The console output.
 
-```console
+```commandline
 https://www.google.com/search?q=google
 Scraping article 1 to 10
 Successfully got a total of 5 unique article links
@@ -117,7 +117,7 @@ Successfully got a total of 10 unique article links
 
 The `results.csv` output.
 
-```csv
+```text
 url,date
 https://www.jagatreview.com/2024/05/karyawan-google-tak-senang/,2024-05-10
 https://teknologi.bisnis.com/read/20240510/84/1764221/google-wallet-mulai-beroperasi-di-india-jalin-kerja-sama-dengan-20-merek-lokal,2024-05-10
@@ -157,7 +157,7 @@ The following is how to get the text or content of all the links in `results.csv
 
 The console output.
 
-```console
+```commandline
 https://www.google.com/search?q=openai
 Scraping article 1 to 10
 Successfully got a total of 5 unique article links
@@ -203,7 +203,7 @@ The `news_dict` output.
 ```
 
 # **Important Notes**
----
+
 - The number of links that can be retrieved depends on the total number of links displayed by Google News. If you want to scrape as much as possible, please enter the argument `number=1000`. There will be no exception that appears if exactly 1000 links are not successfully obtained
 - Not all links can be retrieved for their text/content due to restrictions on the website link. So the `scrape_news_text()` function does not always produce 100% successful output.
 - The reliability of this code in extracting text/content from each link is very dependent on the capabilities of the Newspaper3k library.
