@@ -1,7 +1,7 @@
-dateparser==1.2.0
-newspaper3k==0.2.8
-lxml_html_clean==0.1.1
-numpy==1.26.4
-pandas==2.2.2
-openpyxl==3.1.2
-selenium==4.20.0
+dateparser
+newspaper3k
+lxml_html_clean
+numpy
+pandas
+openpyxl
+selenium
