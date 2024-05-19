@@ -39,6 +39,12 @@ The Google News used in this library is Google News on the main Google search en
 
 ![Get Google News Link](images/get_google_news_link.png)
 
+## **Run in Google Colab**
+To be able to run this library on Google Colab, please install the Firefox driver using the following code.
+```shell
+!apt install firefox
+```
+
 ## **Scrape Google News Link**
 The following is how to scrape links from Google News and save them into a CSV file.
 ```python
@@ -207,12 +213,6 @@ The `news_dict` output.
   'text': "Baca 5 menit sehari untuk update industri startup terkini\n\nDaftar gratis By signing up, I agree to Tech in Asia's Terms of Service and Privacy Policy.\n\nKhusus buat kamu yang super sibuk, dapatkan semua informasi terpenting harian seputar industri startup, teknologi, dan profesional - kami kirim langsung ke inbox kamu.",
   'date': '2024-05-10',
   'tags': ''}}
-```
-
-## **Run in Google Colab**
-To be able to run this library on Google Colab, please install the Firefox driver using the following code.
-```shell
-!apt install firefox
 ```
 
 # **Important Notes**
