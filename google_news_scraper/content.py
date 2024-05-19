@@ -6,7 +6,7 @@ from selenium import webdriver
 from google_news_scraper.setting import firefox_option
 
 
-def scrape_news_text(csv: str, lang: str = 'id') -> tuple[dict, list]:
+def scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]:
     """
     Retrieves ``lang`` language content from all links in ``link_csv``.
 

@@ -1,6 +1,6 @@
 from google_news_scraper.__version__ import __version__
 from google_news_scraper.link import scrape_google_news_link
 from google_news_scraper.link import save_link_to_csv
-from google_news_scraper.content import scrape_news_text
+from google_news_scraper.content import scrape_article_content
 from google_news_scraper.content import save_content_to_csv
 from google_news_scraper.content import save_content_to_excel

@@ -25,7 +25,7 @@ def __split_google_news_link(url: str) -> tuple[str, str]:
     return first_url, second_url
 
 
-def __get_google_main_url(url: str) -> str:
+def __get_google_news_main_url(url: str) -> str:
     """
     Get Google News domain name and main parameters.
 
@@ -60,7 +60,7 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> boo
 
     target = len(result_set) + number
     url1, url2 = __split_google_news_link(url)
-    main_url = __get_google_main_url(url1)
+    main_url = __get_google_news_main_url(url1)
     print(f"\n{main_url}")
 
     firefox_options = firefox_option()

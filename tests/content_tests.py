@@ -3,7 +3,7 @@ import unittest
 from numpy import nan
 from pandas import read_csv
 from pandas import read_excel
-from google_news_scraper import scrape_news_text
+from google_news_scraper import scrape_article_content
 from google_news_scraper import save_content_to_csv
 from google_news_scraper import save_content_to_excel
 
@@ -18,7 +18,7 @@ class ContentTestCase(unittest.TestCase):
 
     def test_scrape_news_text_sce1(self) -> None:
         """Test all links for successful content retrieval"""
-        content, status = scrape_news_text(self.link_success, lang='id')
+        content, status = scrape_article_content(self.link_success, lang='id')
         count_success = 0
         count_failed = 0
         for data in status:
@@ -36,7 +36,7 @@ class ContentTestCase(unittest.TestCase):
 
     def test_scrape_news_text_sce2(self) -> None:
         """Test not all links for successful content retrieval"""
-        content, status = scrape_news_text(self.link_failed, lang='id')
+        content, status = scrape_article_content(self.link_failed, lang='id')
         count_success = 0
         count_failed = 0
         for data in status:
@@ -54,7 +54,7 @@ class ContentTestCase(unittest.TestCase):
 
     def test_scrape_news_text_no_date(self) -> None:
         """Test all links without date for successful content retrieval"""
-        content, status = scrape_news_text(self.link_no_date, lang='id')
+        content, status = scrape_article_content(self.link_no_date, lang='id')
         count_success = 0
         count_failed = 0
         for data in status:
@@ -72,7 +72,7 @@ class ContentTestCase(unittest.TestCase):
 
     def test_scrape_news_text_blocked(self) -> None:
         """Test all links getting blocked for content retrieval"""
-        _, status = scrape_news_text(self.link_blocked, lang='id')
+        _, status = scrape_article_content(self.link_blocked, lang='id')
         count_success = 0
         count_failed = 0
         for data in status:
@@ -86,7 +86,7 @@ class ContentTestCase(unittest.TestCase):
     def test_save_content_to_csv(self) -> None:
         """Test save scraping results to CSV file"""
         csv_file = 'test.csv'
-        content, _ = scrape_news_text(self.link_success, lang='id')
+        content, _ = scrape_article_content(self.link_success, lang='id')
         save_content_to_csv(csv_file, content)
 
         df_content = read_csv(csv_file, sep=';')
@@ -103,7 +103,7 @@ class ContentTestCase(unittest.TestCase):
     def test_save_content_to_excel(self) -> None:
         """Test save scraping results to CSV file"""
         excel_file = 'test.xlsx'
-        content, _ = scrape_news_text(self.link_success, lang='id')
+        content, _ = scrape_article_content(self.link_success, lang='id')
         save_content_to_excel(excel_file, content)
 
         df_content = read_excel(excel_file)
