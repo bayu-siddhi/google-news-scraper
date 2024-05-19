@@ -8,15 +8,22 @@ This library was created because I wanted to share the code I had created with o
 
 There are 5 functions that I provide in this library, the first two are used for link scraping.
 ```python
-def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> bool
-def save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bool = False) -> None
+from google_news_scraper import scrape_google_news_link
+from google_news_scraper import save_link_to_csv
+
+scrape_google_news_link(result_set: set, url: str, number: int = 100) -> bool
+save_link_to_csv(output_file: str, link_set: set, sort: bool = True, asc: bool = False) -> None
 ```
 
 While the rest is used for scraping the content of all links.
 ```python
-def scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]
-def save_content_to_csv(output_file: str, content_dict: dict) -> None
-def save_content_to_excel(output_file: str, content_dict: dict) -> None
+from google_news_scraper import scrape_article_content
+from google_news_scraper import save_content_to_csv
+from google_news_scraper import save_content_to_excel
+
+scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]
+save_content_to_csv(output_file: str, content_dict: dict) -> None
+save_content_to_excel(output_file: str, content_dict: dict) -> None
 ```
 
 # **Get Started**
