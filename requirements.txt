@@ -5,3 +5,4 @@ numpy
 pandas
 openpyxl
 selenium
+geckodriver-autoinstaller
