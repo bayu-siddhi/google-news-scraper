@@ -6,7 +6,7 @@ from pandas import to_datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from google_news_scraper.setting import chrome_option
+from google_news_scraper.setting import firefox_option
 
 
 def __split_google_news_link(url: str) -> tuple[str, str]:
@@ -63,9 +63,8 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> boo
     main_url = __get_google_main_url(url1)
     print(f"\n{main_url}")
 
-    chrome_options = chrome_option()
-
-    driver = webdriver.Chrome(options=chrome_options)
+    firefox_options = firefox_option()
+    driver = webdriver.Firefox(options=firefox_options)
     article_xpath = "//div[contains(@class, 'MjjYud')]/div"
 
     try:

@@ -3,7 +3,7 @@ from pandas import read_csv
 from pandas import DataFrame
 from newspaper import Article
 from selenium import webdriver
-from google_news_scraper.setting import chrome_option
+from google_news_scraper.setting import firefox_option
 
 
 def scrape_news_text(csv: str, lang: str = 'id') -> tuple[dict, list]:
@@ -34,8 +34,8 @@ def scrape_news_text(csv: str, lang: str = 'id') -> tuple[dict, list]:
                 if article.download_state != 2:
                     continue
             else:
-                chrome_options = chrome_option()
-                driver = webdriver.Chrome(options=chrome_options)
+                firefox_options = firefox_option()
+                driver = webdriver.Chrome(options=firefox_options)
                 try:
                     driver.get(str(df_news_link['url'][i]))
                     time.sleep(2)
