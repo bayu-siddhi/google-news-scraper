@@ -1,6 +1,10 @@
-.idea
+dist
+build
+todo
 venv
+google_news_scraper.egg-info
 main.py
+.idea
 *.csv
 *.xlsx
 *.ipynb
