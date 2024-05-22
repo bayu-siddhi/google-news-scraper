@@ -39,8 +39,15 @@ The Google News used in this library is Google News on the main Google search en
 
 ![Get Google News Link](images/get_google_news_link.png)
 
+## **How to Install**
+To install the latest version of this library, please use the following command.
+```shell
+pip install git+https://github.com/bayu-siddhi/google-news-scraper.git
+```
+For details, please see the following website https://pip.pypa.io/en/stable/topics/vcs-support/.
+
 ## **Run in Google Colab**
-To be able to run this library on Google Colab, please install the Firefox driver using the following code.
+To be able to run this library on Google Colab, please install the Firefox driver using the following command.
 ```shell
 !apt install firefox
 ```
