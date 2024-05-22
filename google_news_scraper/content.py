@@ -1,5 +1,6 @@
 import time
 from pandas import read_csv
+from dateparser import parse
 from pandas import DataFrame
 from newspaper import Article
 from selenium import webdriver
@@ -49,11 +50,16 @@ def scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]:
                 article.parse()
                 if article.text and not article.title.startswith('Attention Required!'):
                     number += 1
+                    if date_status:
+                        date = df_news_link['date'][i]
+                    else:
+                        date = parse(date_string=str(article.publish_date), languages=['en', 'id'])
+                        date = date.strftime('%Y-%m-%d') if date is not None else ''
                     dict_news[number] = {
                         'title': str(article.title),
                         'url': str(article.url),
                         'text': str(article.text),
-                        'date': df_news_link['date'][i] if date_status else '',
+                        'date': date,
                         'tags': ', '.join(article.tags)
                     }
                     print(f"{i + 1} [success] {article.url}")

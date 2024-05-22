@@ -68,7 +68,10 @@ class ContentTestCase(unittest.TestCase):
             self.assertIsNotNone(content[i]['title'])
             self.assertIsNotNone(content[i]['url'])
             self.assertIsNotNone(content[i]['text'])
-            self.assertIsNone(content[i]['date'] if content[i]['date'] else None)
+            if content[i]['date']:
+                self.assertIsNotNone(content[i]['date'])
+            else:
+                self.assertEqual(content[i]['date'], '')
 
     def test_scrape_news_text_blocked(self) -> None:
         """Test all links getting blocked for content retrieval"""
