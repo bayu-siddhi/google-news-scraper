@@ -82,7 +82,8 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> boo
                 date = dateparser.parse(
                     date_string=article.find_element(By.CLASS_NAME, "OSrXXb").text,
                     languages=['en', 'id'])
-                result_set.add(tuple([a, date.strftime('%Y-%m-%d')]))
+                date = date.strftime('%Y-%m-%d') if date is not None else ''
+                result_set.add(tuple([a, date]))
                 if len(result_set) == target:
                     break
             if len(result_set) == target:
