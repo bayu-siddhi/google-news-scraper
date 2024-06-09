@@ -17,11 +17,12 @@ def scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]:
 
     Returns:
         tuple[dict, list]: (dict_news, status)
-    """    
+    """
     df_news_link = read_csv(csv)
     date_status = 'date' in df_news_link.columns
     dict_news = dict()
     status = list()
+    driver = str()
     number = -1
     print()
 
@@ -44,8 +45,6 @@ def scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]:
                     article.download(input_html)
                 except Exception as e:
                     pass
-                finally:
-                    driver.close()
             try:
                 article.parse()
                 if article.text and not article.title.startswith('Attention Required!'):
@@ -73,6 +72,9 @@ def scrape_article_content(csv: str, lang: str = 'id') -> tuple[dict, list]:
             print(f"{i + 1} [failed ] {article.url}")
             status.append(['failed', str(df_news_link['url'][i])])
 
+    if driver:
+        driver.quit()
+
     count_success = 0
     count_failed = 0
     for data in status:
@@ -95,7 +97,7 @@ def save_content_to_csv(output_file: str, content_dict: dict) -> None:
     Args:
         output_file (str): The desired output CSV file name
         content_dict (dict): Dictionary of content scraping results
-    """    
+    """
     df_news = DataFrame.from_dict(content_dict, orient='index')
     if output_file.endswith('.csv'):
         df_news.to_csv(output_file, index=False, sep=";")
@@ -110,7 +112,7 @@ def save_content_to_excel(output_file: str, content_dict: dict) -> None:
     Args:
         output_file (str): The desired output XLSX file name
         content_dict (dict): Dictionary of content scraping results
-    """    
+    """
     df_news = DataFrame.from_dict(content_dict, orient='index')
     if output_file.endswith('.xlsx'):
         df_news.to_excel(output_file, index=False)

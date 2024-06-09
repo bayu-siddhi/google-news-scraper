@@ -91,7 +91,7 @@ def scrape_google_news_link(result_set: set, url: str, number: int = 100) -> boo
     except NoSuchElementException as e:
         print('The pages of the web have run out')
     finally:
-        driver.close()
+        driver.quit()
 
     message = f"Successfully got a total of {len(result_set)} unique article links"
     print(message)
